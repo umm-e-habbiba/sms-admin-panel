@@ -1,9 +1,10 @@
 # SMS Admin Panel
-[![Bootstrap Admin Template](https://assets.coreui.io/products/coreui-free-bootstrap-admin-template-light-dark.webp)](https://coreui.io/product/free-react-admin-template/)
+![sms](https://github.com/umm-e-habbiba/sms-admin-panel/assets/144680283/ea2201eb-6339-401b-b7d5-82aa02292709)
 
 ## Table of Contents
 
 * [Installation](#installation)
+
 * [Basic usage](#basic-usage)
 * [What's included](#whats-included)
 
