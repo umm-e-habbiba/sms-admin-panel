@@ -161,23 +161,50 @@ const Failed = () => {
             </center>
           ) : (
             <>
-              <CTable striped>
+              <CTable striped responsive>
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col" className="text-center">
                       #
                     </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[95px]">
+                      First name
+                    </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
-                      Number
+                      Last name
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center">
+                      Phone
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[115px]">
+                      Home Phone
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center">
+                      Phone2
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center">
+                      Phone3
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center">
+                      Phone4
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center">
+                      Phone5
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[340px]">
+                      Address
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center">
+                      State
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[95px]">
+                      Zip code
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
                       Date
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
                       Time
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
-                      Status
                     </CTableHeaderCell>
                     {/* <CTableHeaderCell scope="col">Actions</CTableHeaderCell> */}
                   </CTableRow>
@@ -186,21 +213,47 @@ const Failed = () => {
                   {allUsers && allUsers.length > 0 ? (
                     allUsers.map((user, i) => (
                       <CTableRow key={i}>
-                        <CTableDataCell scope="row" className="text-center">
+                        <CTableDataCell scope="row" className="text-center align-middle">
                           {i + 1}
                         </CTableDataCell>
-                        <CTableDataCell className="text-center">{user.phone}</CTableDataCell>
-                        <CTableDataCell className="text-center">
+                        <CTableDataCell className="text-center align-middle">
+                          {user.firstName}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.lastName}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.phoneOne}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.phoneHome}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.phoneTwo}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.phoneThree}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.phoneFour}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.phoneFive}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle w-auto">
+                          {user.homeAddress}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.state}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.postalAddress}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
                           {moment(user.date).format('Do MMMM YYYY')}
                         </CTableDataCell>
-                        <CTableDataCell className="text-center">
+                        <CTableDataCell className="text-center align-middle">
                           {moment(user.date).format('h:mm a')}
-                        </CTableDataCell>
-                        <CTableDataCell className="flex justify-center items-center">
-                          <CBadge color="danger" className="w-4 h-4 rounded-full mr-1">
-                            {' '}
-                          </CBadge>
-                          <span>{user.status}</span>
                         </CTableDataCell>
                         {/* <CTableDataCell>
                           <CButton
@@ -220,7 +273,7 @@ const Failed = () => {
                     ))
                   ) : (
                     <CTableRow>
-                      <CTableDataCell colSpan={5} className="text-center">
+                      <CTableDataCell colSpan={14} className="text-center">
                         No Failed Users
                       </CTableDataCell>
                     </CTableRow>

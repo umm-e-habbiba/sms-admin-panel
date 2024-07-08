@@ -63,8 +63,8 @@ const AddUsers = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone: '',
-      status: '',
+      name: '',
+      file: '',
     },
   })
   const addUser = (data) => {
@@ -74,25 +74,23 @@ const AddUsers = () => {
     setErrorMsg('')
     const myHeaders = new Headers()
     myHeaders.append('Authorization', token)
-    myHeaders.append('Content-Type', 'application/json')
 
-    const raw = JSON.stringify({
-      phone: data.phone,
-      status: data.status,
-    })
+    const formData = new FormData()
+    formData.append('listname', data.name)
+    formData.append('file', data.file[0])
 
     const requestOptions = {
       method: 'POST',
-      body: raw,
+      body: formData,
       headers: myHeaders,
       redirect: 'follow',
     }
 
-    fetch(API_URL + 'add-user', requestOptions)
+    fetch(API_URL + 'upload-excel', requestOptions)
       .then((response) => response.json())
       .then((result) => {
         // console.log(result)
-        if (result.success) {
+        if (result.status == 'success') {
           setSpinner(false)
           reset({})
           setSuccess(true)
@@ -123,21 +121,36 @@ const AddUsers = () => {
             <CForm>
               <CRow className="mb-3">
                 <CCol md={12}>
-                  <CFormLabel>Phone</CFormLabel>
+                  <CFormLabel>List Name</CFormLabel>
                   <CRow>
                     <CCol md={12}>
                       <CFormInput
-                        placeholder="Phone Number"
-                        type="number"
-                        {...register('phone', { required: true })}
-                        feedback="Phone number is required"
-                        invalid={errors.phone ? true : false}
+                        placeholder="Enter list name here"
+                        type="text"
+                        {...register('name', { required: true })}
+                        feedback="List name is required"
+                        invalid={errors.name ? true : false}
                       />
                     </CCol>
                   </CRow>
                 </CCol>
               </CRow>
               <CRow className="mb-3">
+                <CCol md={12}>
+                  <CFormLabel>Upload File</CFormLabel>
+                  <CRow>
+                    <CCol md={12}>
+                      <CFormInput
+                        type="file"
+                        {...register('file', { required: true })}
+                        feedback="File is required"
+                        invalid={errors.file ? true : false}
+                      />
+                    </CCol>
+                  </CRow>
+                </CCol>
+              </CRow>
+              {/* <CRow className="mb-3">
                 <CCol md={12}>
                   <CFormSelect
                     label="Status"
@@ -155,11 +168,11 @@ const AddUsers = () => {
                     invalid={errors.status ? true : false}
                   />
                 </CCol>
-              </CRow>
+              </CRow> */}
             </CForm>
             {error && <p className="mt-3 text-base text-red-700">{errorMsg}</p>}
             <CButton color="primary" type="submit" disabled={spinner ? true : false}>
-              {spinner ? <CSpinner color="light" size="sm" /> : 'Add User'}
+              {spinner ? <CSpinner color="light" size="sm" /> : 'Add'}
             </CButton>
           </CForm>
         </CCardBody>
