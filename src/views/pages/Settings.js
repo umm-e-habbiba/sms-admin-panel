@@ -90,6 +90,7 @@ const Settings = () => {
           if (result.status == 'success') {
             setSuccess(true)
             setTextMessage('')
+            setGroupName('')
             setSuccessMsg(result.message)
             getSMSSettings()
             setTimeout(() => {
