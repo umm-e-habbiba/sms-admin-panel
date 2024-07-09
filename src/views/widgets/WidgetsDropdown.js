@@ -42,8 +42,8 @@ const WidgetsDropdown = (props) => {
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="primary"
-          value={<>{props.completed}</>}
-          title="Completed"
+          value={<>{props.active}</>}
+          title="Active Users"
           chart={
             <CChartLine
               ref={widgetChartRef1}
@@ -112,8 +112,8 @@ const WidgetsDropdown = (props) => {
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="info"
-          value={<>{props.pending}</>}
-          title="Pending"
+          value={<>{props.unsubscribed}</>}
+          title="Unsubscribed Users"
           chart={
             <CChartLine
               ref={widgetChartRef2}
@@ -182,7 +182,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="danger"
           value={<>{props.failed}</>}
-          title="Failed"
+          title="Failed Users"
           chart={
             <CChartLine
               className="mt-3"
@@ -234,7 +234,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="warning"
           value={<>{props.total}</>}
-          title="Total"
+          title="Total Users"
           chart={
             <CChartBar
               className="mt-3 mx-3"

@@ -54,8 +54,8 @@ const Dashboard = () => {
           <WidgetsDropdown
             className="mb-4"
             total={allUsers.length}
-            completed={allUsers.filter((user) => user.status == 'Answered').length}
-            pending={allUsers.filter((user) => user.status == 'Pending').length}
+            active={allUsers.filter((user) => user.status == 'Pending').length}
+            unsubscribed={allUsers.filter((user) => user.status == 'Unsubscribed').length}
             failed={allUsers.filter((user) => user.status == 'Failed').length}
           />
         )}

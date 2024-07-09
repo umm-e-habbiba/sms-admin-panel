@@ -9,6 +9,7 @@ import {
   CFormTextarea,
   CSpinner,
   CAlert,
+  CFormSelect,
 } from '@coreui/react'
 import { API_URL } from '../../../src/store'
 
@@ -21,31 +22,57 @@ const Settings = () => {
   const [success, setSuccess] = useState(false)
   const [successMsg, setSuccessMsg] = useState('')
   const [textMessage, setTextMessage] = useState('')
+  const [groupName, setGroupName] = useState('')
   const [textMessageError, setTextMessageError] = useState('')
+  const [groupNameError, setGroupNameError] = useState('')
   const [callError, setCallError] = useState(false)
   const [callErrorMsg, setCallErrorMSg] = useState('')
+  const [groupNames, setGroupNames] = useState([])
 
   useEffect(() => {
     const getToken = localStorage.getItem('token')
     if (getToken) {
       setToken(getToken)
+      getAllUsers()
     } else {
       navigate('/login')
     }
   }, [])
+  const getAllUsers = () => {
+    const myHeaders = new Headers()
+    myHeaders.append('Authorization', token)
 
+    const requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    }
+
+    fetch(API_URL + 'all-groupnames', requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+        if (result.status == 'success') {
+          // setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
+          setGroupNames(result.uniqueGroupNames)
+        }
+      })
+      .catch((error) => console.error(error))
+  }
   const sendSMS = () => {
     setError(false)
     setErrorMsg('')
     setTextMessageError('')
+    setGroupNameError('')
     setSmsLoading(true)
-    if (textMessage != '') {
+    if (textMessage != '' && groupName != '') {
       const myHeaders = new Headers()
       myHeaders.append('Authorization', token)
       myHeaders.append('Content-Type', 'application/json')
 
       const raw = JSON.stringify({
         smsText: textMessage,
+        groupName: groupName,
       })
 
       const requestOptions = {
@@ -78,7 +105,12 @@ const Settings = () => {
           setSmsLoading(false)
         })
     } else {
-      setTextMessageError('SMS is required')
+      if (textMessage == '') {
+        setTextMessageError('SMS is required')
+      }
+      if (groupName == '') {
+        setGroupNameError('Group name is required')
+      }
       setSmsLoading(false)
     }
   }
@@ -87,6 +119,23 @@ const Settings = () => {
       <CCard className="mb-3">
         <CCardHeader>SMS Settings</CCardHeader>
         <CCardBody>
+          <CFormSelect
+            aria-label="Default select example"
+            label="Group name"
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)}
+            className="mb-3"
+          >
+            <option>Select group name</option>
+            {groupNames && groupNames.length > 0
+              ? groupNames.map((name, index) => (
+                  <option value={name} key={index}>
+                    {name}
+                  </option>
+                ))
+              : ''}
+          </CFormSelect>
+          {groupNameError && <div className="text-red-400 my-3">{groupNameError}</div>}
           <CFormTextarea
             rows={5}
             placeholder="Enter Message Here..."

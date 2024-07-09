@@ -76,7 +76,7 @@ const AddUsers = () => {
     myHeaders.append('Authorization', token)
 
     const formData = new FormData()
-    formData.append('listname', data.name)
+    formData.append('listName', data.name)
     formData.append('file', data.file[0])
 
     const requestOptions = {
