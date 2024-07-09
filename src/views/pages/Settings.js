@@ -109,7 +109,7 @@ const Settings = () => {
         setTextMessageError('SMS is required')
       }
       if (groupName == '') {
-        setGroupNameError('Group name is required')
+        setGroupNameError('List name is required')
       }
       setSmsLoading(false)
     }
@@ -121,12 +121,12 @@ const Settings = () => {
         <CCardBody>
           <CFormSelect
             aria-label="Default select example"
-            label="Group name"
+            label="List name"
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
             className="mb-3"
           >
-            <option>Select group name</option>
+            <option>Select List name</option>
             {groupNames && groupNames.length > 0
               ? groupNames.map((name, index) => (
                   <option value={name} key={index}>
