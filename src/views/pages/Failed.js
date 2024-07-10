@@ -167,16 +167,16 @@ const Failed = () => {
                     <CTableHeaderCell scope="col" className="text-center">
                       #
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[95px]">
+                    <CTableHeaderCell scope="col" className="text-center w-[115px]">
                       First name
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
+                    <CTableHeaderCell scope="col" className="text-center w-[115px]">
                       Last name
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
                       Phone
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[115px]">
+                    <CTableHeaderCell scope="col" className="text-center w-[135px]">
                       Home Phone
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
@@ -191,9 +191,6 @@ const Failed = () => {
                     <CTableHeaderCell scope="col" className="text-center">
                       Phone5
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
-                      No of Messages
-                    </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center w-[340px]">
                       Address
                     </CTableHeaderCell>
@@ -203,12 +200,15 @@ const Failed = () => {
                     <CTableHeaderCell scope="col" className="text-center w-[95px]">
                       Zip code
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
+                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                      Messages sent
+                    </CTableHeaderCell>
+                    {/* <CTableHeaderCell scope="col" className="text-center">
                       Date
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
                       Time
-                    </CTableHeaderCell>
+                    </CTableHeaderCell> */}
                     {/* <CTableHeaderCell scope="col">Actions</CTableHeaderCell> */}
                   </CTableRow>
                 </CTableHead>
@@ -243,9 +243,6 @@ const Failed = () => {
                         <CTableDataCell className="text-center align-middle">
                           {user.phoneFive}
                         </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.numberOfMessages}
-                        </CTableDataCell>
                         <CTableDataCell className="text-center align-middle w-auto">
                           {user.homeAddress}
                         </CTableDataCell>
@@ -256,11 +253,14 @@ const Failed = () => {
                           {user.postalAddress}
                         </CTableDataCell>
                         <CTableDataCell className="text-center align-middle">
+                          {user.numberOfMessages}
+                        </CTableDataCell>
+                        {/* <CTableDataCell className="text-center align-middle">
                           {moment(user.date).format('Do MMMM YYYY')}
                         </CTableDataCell>
                         <CTableDataCell className="text-center align-middle">
                           {moment(user.date).format('h:mm a')}
-                        </CTableDataCell>
+                        </CTableDataCell> */}
                         {/* <CTableDataCell>
                           <CButton
                             color="danger"
