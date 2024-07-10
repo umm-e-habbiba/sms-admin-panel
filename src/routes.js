@@ -8,8 +8,8 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
 const routes = [
   { path: '/', name: 'Dashboard', element: Dashboard },
-  { path: '/completed', name: 'Completed', element: Completed },
-  { path: '/pending', name: 'Pending', element: Pending },
+  { path: '/unsubscribed', name: 'Unsubscribed', element: Completed },
+  { path: '/active', name: 'Active', element: Pending },
   { path: '/failed', name: 'Failed', element: Failed },
   { path: '/settings', name: 'Settings', element: Settings },
   { path: '/add-users', name: 'Add User', element: Settings },

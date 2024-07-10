@@ -4,6 +4,7 @@ import {
   cilBell,
   cilCalculator,
   cilChartPie,
+  cilChatBubble,
   cilCheck,
   cilCheckAlt,
   cilCheckCircle,
@@ -11,6 +12,7 @@ import {
   cilCursor,
   cilDescription,
   cilDrop,
+  cilEnvelopeClosed,
   cilNotes,
   cilPencil,
   cilPuzzle,
@@ -18,6 +20,8 @@ import {
   cilSpeedometer,
   cilStar,
   cilUserPlus,
+  cilUserUnfollow,
+  cilX,
   cilXCircle,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
@@ -118,21 +122,19 @@ const _nav = [
   // },
   {
     component: CNavItem,
-    name: 'Completed',
-    to: '/completed',
-    // icon: <CIcon icon={cilCheck} customClassName="nav-icon" />,
-    // icon: <CIcon icon={cilCheckAlt} customClassName="nav-icon" />,
+    name: 'Active Users',
+    to: '/active',
     icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Pending',
-    to: '/pending',
-    icon: <CIcon icon={cilClock} customClassName="nav-icon" />,
+    name: 'Unsubscribed Users',
+    to: '/unsubscribed',
+    icon: <CIcon icon={cilUserUnfollow} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Failed',
+    name: 'Failed Users',
     to: '/failed',
     icon: <CIcon icon={cilXCircle} customClassName="nav-icon" />,
   },
@@ -144,9 +146,9 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Settings',
+    name: 'Send SMS',
     to: '/settings',
-    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilChatBubble} customClassName="nav-icon" />,
   },
 ]
 

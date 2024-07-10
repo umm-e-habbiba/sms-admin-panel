@@ -141,7 +141,7 @@ const Pending = () => {
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>Pending ({allUsers.length})</span>
+          <span>Active ({allUsers.length})</span>
           {/* <CButton
             color="success"
             className="text-white"
@@ -191,6 +191,9 @@ const Pending = () => {
                     <CTableHeaderCell scope="col" className="text-center">
                       Phone5
                     </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                      No of Messages
+                    </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center w-[340px]">
                       Address
                     </CTableHeaderCell>
@@ -239,6 +242,9 @@ const Pending = () => {
                         </CTableDataCell>
                         <CTableDataCell className="text-center align-middle">
                           {user.phoneFive}
+                        </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.numberOfMessages}
                         </CTableDataCell>
                         <CTableDataCell className="text-center align-middle w-auto">
                           {user.homeAddress}

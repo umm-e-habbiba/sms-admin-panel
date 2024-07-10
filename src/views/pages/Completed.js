@@ -84,7 +84,7 @@ const Completed = () => {
       .then((result) => {
         console.log(result)
         if (result.success) {
-          setallUsers(result.Users?.filter((user) => user.status == 'Answered'))
+          setallUsers(result.Users?.filter((user) => user.status == 'Unsubscribed'))
           setLoader(false)
         }
       })
@@ -141,7 +141,7 @@ const Completed = () => {
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>Completed ({allUsers.length})</span>
+          <span>Unsubscribed ({allUsers.length})</span>
           {/* <CButton
             color="success"
             className="text-white"
@@ -190,6 +190,9 @@ const Completed = () => {
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
                       Phone5
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                      No of Messages
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center w-[340px]">
                       Address
@@ -240,6 +243,9 @@ const Completed = () => {
                         <CTableDataCell className="text-center align-middle">
                           {user.phoneFive}
                         </CTableDataCell>
+                        <CTableDataCell className="text-center align-middle">
+                          {user.numberOfMessages}
+                        </CTableDataCell>
                         <CTableDataCell className="text-center align-middle w-auto">
                           {user.homeAddress}
                         </CTableDataCell>
@@ -274,7 +280,7 @@ const Completed = () => {
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">
-                        No Completed Users
+                        No Unsubscribed Users
                       </CTableDataCell>
                     </CTableRow>
                   )}
