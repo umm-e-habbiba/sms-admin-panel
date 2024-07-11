@@ -33,7 +33,7 @@ import { cilTrash } from '@coreui/icons'
 import { API_URL } from '../../store'
 import { useForm } from 'react-hook-form'
 import moment from 'moment'
-const Failed = () => {
+const AllUser = () => {
   const navigate = useNavigate()
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const [loader, setLoader] = useState(false)
@@ -89,58 +89,11 @@ const Failed = () => {
       .then((result) => {
         console.log(result)
         if (result.success) {
-          setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
+          setallUsers(result.Users)
           setLoader(false)
         }
       })
       .catch((error) => console.error(error))
-  }
-  const addUser = (data) => {
-    console.log('adduser function called', data)
-    setSpinner(true)
-    setError(false)
-    setErrorMsg('')
-    const myHeaders = new Headers()
-    myHeaders.append('Authorization', token)
-    myHeaders.append('Content-Type', 'application/json')
-
-    const raw = JSON.stringify({
-      phone: data.phone,
-      status: data.status,
-    })
-
-    const requestOptions = {
-      method: 'POST',
-      body: raw,
-      headers: myHeaders,
-      redirect: 'follow',
-    }
-
-    fetch(API_URL + 'add-user', requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        // console.log(result)
-        if (result.success) {
-          setAddModal(false)
-          setSpinner(false)
-          getAllUsers()
-          reset({})
-          setSuccess(true)
-          setSuccessMsg(result.message)
-          setTimeout(() => {
-            setSuccess(false)
-            setSuccessMsg('')
-          }, 3000)
-        } else {
-          setError(true)
-          setErrorMsg(result.message)
-          setSpinner(false)
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-        setSpinner(false)
-      })
   }
   const getAllGroupNames = () => {
     const myHeaders = new Headers()
@@ -174,18 +127,18 @@ const Failed = () => {
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>Delivery Failed ({allUsers.length})</span>
+          <span>All Users ({allUsers.length})</span>
           {/* <CButton
-            color="success"
-            className="text-white"
-            onClick={() => {
-              setAddModal(true)
-              setError(false)
-              setErrorMsg('')
-            }}
-          >
-            Add User
-          </CButton> */}
+          color="success"
+          className="text-white"
+          onClick={() => {
+            setAddModal(true)
+            setError(false)
+            setErrorMsg('')
+          }}
+        >
+          Add User
+        </CButton> */}
         </CCardHeader>
         <CCardBody>
           {loader ? (
@@ -258,15 +211,12 @@ const Failed = () => {
                     <CTableHeaderCell scope="col" className="text-center w-[95px]">
                       Zip code
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
-                      Messages sent
-                    </CTableHeaderCell>
                     {/* <CTableHeaderCell scope="col" className="text-center">
-                      Date
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
-                      Time
-                    </CTableHeaderCell> */}
+                    Date
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" className="text-center">
+                    Time
+                  </CTableHeaderCell> */}
                     {/* <CTableHeaderCell scope="col">Actions</CTableHeaderCell> */}
                   </CTableRow>
                 </CTableHead>
@@ -321,25 +271,25 @@ const Failed = () => {
                                 {user.numberOfMessages}
                               </CTableDataCell>
                               {/* <CTableDataCell className="text-center align-middle">
-                      {moment(user.date).format('Do MMMM YYYY')}
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center align-middle">
-                      {moment(user.date).format('h:mm a')}
-                    </CTableDataCell> */}
+                        {moment(user.date).format('Do MMMM YYYY')}
+                      </CTableDataCell>
+                      <CTableDataCell className="text-center align-middle">
+                        {moment(user.date).format('h:mm a')}
+                      </CTableDataCell> */}
                               {/* <CTableDataCell>
-                      <CButton
-                        color="danger"
-                        className="text-white py-2 my-2"
-                        onClick={(e) => {
-                          setDeleteModal(true)
-                          setSmsId(x._id)
-                          setError(false)
-                          setErrorMsg('')
-                        }}
-                      >
-                        <CIcon icon={cilTrash} />
-                      </CButton>
-                    </CTableDataCell> */}
+                        <CButton
+                          color="danger"
+                          className="text-white py-2 my-2"
+                          onClick={(e) => {
+                            setDeleteModal(true)
+                            setSmsId(x._id)
+                            setError(false)
+                            setErrorMsg('')
+                          }}
+                        >
+                          <CIcon icon={cilTrash} />
+                        </CButton>
+                      </CTableDataCell> */}
                             </CTableRow>
                           ))
                       ) : (
@@ -392,36 +342,33 @@ const Failed = () => {
                             <CTableDataCell className="text-center align-middle">
                               {user.postalAddress}
                             </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.numberOfMessages}
-                            </CTableDataCell>
                             {/* <CTableDataCell className="text-center align-middle">
-                          {moment(user.date).format('Do MMMM YYYY')}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {moment(user.date).format('h:mm a')}
-                        </CTableDataCell> */}
+                      {moment(user.date).format('Do MMMM YYYY')}
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center align-middle">
+                      {moment(user.date).format('h:mm a')}
+                    </CTableDataCell> */}
                             {/* <CTableDataCell>
-                          <CButton
-                            color="danger"
-                            className="text-white py-2 my-2"
-                            onClick={(e) => {
-                              setDeleteModal(true)
-                              setSmsId(x._id)
-                              setError(false)
-                              setErrorMsg('')
-                            }}
-                          >
-                            <CIcon icon={cilTrash} />
-                          </CButton>
-                        </CTableDataCell> */}
+                      <CButton
+                        color="danger"
+                        className="text-white py-2 my-2"
+                        onClick={(e) => {
+                          setDeleteModal(true)
+                          setSmsId(x._id)
+                          setError(false)
+                          setErrorMsg('')
+                        }}
+                      >
+                        <CIcon icon={cilTrash} />
+                      </CButton>
+                    </CTableDataCell> */}
                           </CTableRow>
                         ))
                     )
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">
-                        No Failed Users
+                        No Users Found
                       </CTableDataCell>
                     </CTableRow>
                   )}
@@ -431,77 +378,7 @@ const Failed = () => {
           )}
         </CCardBody>
       </CCard>
-      {/* add modal */}
-      <CModal
-        alignment="center"
-        visible={addModal}
-        onClose={() => setAddModal(false)}
-        aria-labelledby="VerticallyCenteredExample"
-        size="lg"
-        backdrop="static"
-      >
-        <CModalHeader>
-          <CModalTitle id="VerticallyCenteredExample">Add User</CModalTitle>
-        </CModalHeader>
-        <CForm onSubmit={handleSubmit(addUser)}>
-          <CModalBody>
-            <CForm>
-              <CRow className="mb-3">
-                <CCol md={12}>
-                  <CFormLabel>Phone</CFormLabel>
-                  <CRow>
-                    <CCol md={12}>
-                      <CFormInput
-                        placeholder="Phone Number"
-                        type="number"
-                        {...register('phone', { required: true })}
-                        feedback="Phone number is required"
-                        invalid={errors.phone ? true : false}
-                        className="mb-2"
-                      />
-                    </CCol>
-                  </CRow>
-                </CCol>
-              </CRow>
-              <CRow className="mb-3">
-                <CCol md={12}>
-                  <CFormSelect
-                    label="Status"
-                    aria-label="status"
-                    id="status"
-                    defaultValue={getValues('status')}
-                    options={[
-                      { label: 'Select Status', value: '' },
-                      { label: 'Pending', value: 'Pending' },
-                      { label: 'Answered', value: 'Answered' },
-                      { label: 'Failed', value: 'Failed' },
-                    ]}
-                    {...register('status', { required: true })}
-                    feedback="Status is required"
-                    invalid={errors.status ? true : false}
-                  />
-                </CCol>
-              </CRow>
-            </CForm>
-            {error && <p className="mt-3 text-base text-red-700">{errorMsg}</p>}
-          </CModalBody>
-          <CModalFooter>
-            <CButton color="secondary" onClick={() => setAddModal(false)}>
-              Close
-            </CButton>
-            <CButton color="primary" type="submit" disabled={spinner ? true : false}>
-              {spinner ? <CSpinner color="light" size="sm" /> : 'Add'}
-            </CButton>
-          </CModalFooter>
-        </CForm>
-      </CModal>
-      {/* success alert */}
-      {success && (
-        <CAlert color="success" className="success-alert">
-          {successMsg}
-        </CAlert>
-      )}
     </DefaultLayout>
   )
 }
-export default Failed
+export default AllUser

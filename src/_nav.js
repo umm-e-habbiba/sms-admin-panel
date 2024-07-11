@@ -19,6 +19,7 @@ import {
   cilSettings,
   cilSpeedometer,
   cilStar,
+  cilUserFollow,
   cilUserPlus,
   cilUserUnfollow,
   cilX,
@@ -122,21 +123,27 @@ const _nav = [
   // },
   {
     component: CNavItem,
-    name: 'Active Users',
+    name: 'SMS Delivered',
     to: '/active',
     icon: <CIcon icon={cilCheckCircle} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Unsubscribed Users',
+    name: 'Opt-Out Users',
     to: '/unsubscribed',
     icon: <CIcon icon={cilUserUnfollow} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Failed Users',
+    name: 'Delivery Failed',
     to: '/failed',
     icon: <CIcon icon={cilXCircle} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'All Users',
+    to: '/all-users',
+    icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,

@@ -33,12 +33,12 @@ const Settings = () => {
     const getToken = localStorage.getItem('token')
     if (getToken) {
       setToken(getToken)
-      getAllUsers()
+      getAllGroupNames()
     } else {
       navigate('/login')
     }
   }, [])
-  const getAllUsers = () => {
+  const getAllGroupNames = () => {
     const myHeaders = new Headers()
     myHeaders.append('Authorization', token)
 

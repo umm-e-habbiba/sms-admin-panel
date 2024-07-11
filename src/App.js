@@ -10,6 +10,7 @@ import Pending from './views/pages/Pending'
 import Failed from './views/pages/Failed'
 import Settings from './views/pages/Settings'
 import AddUsers from './views/pages/AddUsers'
+import AllUser from './views/pages/AllUser'
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
@@ -51,11 +52,12 @@ const App = () => {
           <Route exact path="/" name="Dashboard" element={<Dashboard />} />
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route path="/register" name="Register Page" element={<Register />} />
-          <Route path="/unsubscribed" name="Unsubscribed" element={<Completed />} />
-          <Route path="/active" name="Active" element={<Pending />} />
-          <Route path="/failed" name="Failed" element={<Failed />} />
+          <Route path="/unsubscribed" name="Opt-Out Users" element={<Completed />} />
+          <Route path="/active" name="SMS Delivered" element={<Pending />} />
+          <Route path="/failed" name="Delivery Failed" element={<Failed />} />
           <Route path="/settings" name="Settings" element={<Settings />} />
           <Route path="/add-users" name="Add Users" element={<AddUsers />} />
+          <Route path="/all-users" name="All Users" element={<AllUser />} />
           <Route path="*" name="Page 404" element={<Page404 />} />
         </Routes>
       </Suspense>

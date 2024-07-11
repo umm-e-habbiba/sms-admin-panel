@@ -43,7 +43,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="primary"
           value={<>{props.active}</>}
-          title="Active Users"
+          title="SMS Delivered"
           chart={
             <CChartLine
               ref={widgetChartRef1}
@@ -113,7 +113,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="info"
           value={<>{props.unsubscribed}</>}
-          title="Unsubscribed Users"
+          title="Opt-Out Users"
           chart={
             <CChartLine
               ref={widgetChartRef2}
@@ -182,7 +182,7 @@ const WidgetsDropdown = (props) => {
         <CWidgetStatsA
           color="danger"
           value={<>{props.failed}</>}
-          title="Failed Users"
+          title="Delivery Failed"
           chart={
             <CChartLine
               className="mt-3"

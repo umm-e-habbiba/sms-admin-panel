@@ -45,10 +45,16 @@ const Pending = () => {
   const [success, setSuccess] = useState(false)
   const [successMsg, setSuccessMsg] = useState('')
   const [addModal, setAddModal] = useState(false)
+  const [groupNames, setGroupNames] = useState([])
+  const [groupName, setGroupName] = useState('')
+  const [showFilteredResult, setShowFilteredResult] = useState(false)
+  const [filteredUser, setFilteredUser] = useState([])
+
   useEffect(() => {
     const getToken = localStorage.getItem('token')
     if (getToken) {
       getAllUsers()
+      getAllGroupNames()
       setToken(getToken)
     } else {
       navigate('/login')
@@ -137,11 +143,39 @@ const Pending = () => {
         setSpinner(false)
       })
   }
+  const getAllGroupNames = () => {
+    const myHeaders = new Headers()
+    myHeaders.append('Authorization', token)
+
+    const requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    }
+
+    fetch(API_URL + 'all-groupnames', requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+        if (result.status == 'success') {
+          // setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
+          setGroupNames(result.uniqueGroupNames)
+        }
+      })
+      .catch((error) => console.error(error))
+  }
+  const getFilteredUsers = (value) => {
+    // console.log('step', filterUsmle, 'category', filterCategory)
+    let filtered_result = []
+    filtered_result = allUsers.filter((user) => user.groupName == value)
+    setShowFilteredResult(true)
+    setFilteredUser(filtered_result)
+  }
   return (
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>Active ({allUsers.length})</span>
+          <span>SMS Delivered</span>
           {/* <CButton
             color="success"
             className="text-white"
@@ -161,6 +195,31 @@ const Pending = () => {
             </center>
           ) : (
             <>
+              <CRow className="flex justify-start items-center">
+                <CCol sm={12} lg={1}>
+                  <CFormLabel className="text-center">List Name: </CFormLabel>
+                </CCol>
+                <CCol sm={12} lg={11}>
+                  <CFormSelect
+                    aria-label="Default select example"
+                    value={groupName}
+                    onChange={(e) => {
+                      getFilteredUsers(e.target.value)
+                      setGroupName(e.target.value)
+                    }}
+                    className="mb-3 "
+                  >
+                    <option value="">Select List name</option>
+                    {groupNames && groupNames.length > 0
+                      ? groupNames.map((name, index) => (
+                          <option value={name} key={index}>
+                            {name}
+                          </option>
+                        ))
+                      : ''}
+                  </CFormSelect>
+                </CCol>
+              </CRow>
               <CTable striped responsive>
                 <CTableHead>
                   <CTableRow>
@@ -214,58 +273,137 @@ const Pending = () => {
                 </CTableHead>
                 <CTableBody>
                   {allUsers && allUsers.length > 0 ? (
-                    allUsers
-                      .sort((a, b) => {
-                        return new Date(b.date).getTime() - new Date(a.date).getTime()
-                      })
-                      .map((user, i) => (
-                        <CTableRow key={i}>
-                          <CTableDataCell scope="row" className="text-center align-middle">
-                            {i + 1}
+                    showFilteredResult ? (
+                      filteredUser && filteredUser.length > 0 ? (
+                        filteredUser
+                          .filter((user) => user.numberOfMessages > 0)
+                          .sort((a, b) => {
+                            return new Date(b.date).getTime() - new Date(a.date).getTime()
+                          })
+                          .map((user, i) => (
+                            <CTableRow key={i}>
+                              <CTableDataCell scope="row" className="text-center align-middle">
+                                {i + 1}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.firstName}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.lastName}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.phoneOne}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.phoneHome}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.phoneTwo}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.phoneThree}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.phoneFour}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.phoneFive}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle w-auto">
+                                {user.homeAddress}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.state}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.postalAddress}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.numberOfMessages}
+                              </CTableDataCell>
+                              {/* <CTableDataCell className="text-center align-middle">
+                      {moment(user.date).format('Do MMMM YYYY')}
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center align-middle">
+                      {moment(user.date).format('h:mm a')}
+                    </CTableDataCell> */}
+                              {/* <CTableDataCell>
+                      <CButton
+                        color="danger"
+                        className="text-white py-2 my-2"
+                        onClick={(e) => {
+                          setDeleteModal(true)
+                          setSmsId(x._id)
+                          setError(false)
+                          setErrorMsg('')
+                        }}
+                      >
+                        <CIcon icon={cilTrash} />
+                      </CButton>
+                    </CTableDataCell> */}
+                            </CTableRow>
+                          ))
+                      ) : (
+                        <CTableRow>
+                          <CTableDataCell colSpan={14} className="text-center">
+                            No SMS Sent in this list
                           </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.firstName}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.lastName}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.phoneOne}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.phoneHome}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.phoneTwo}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.phoneThree}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.phoneFour}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.phoneFive}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle w-auto">
-                            {user.homeAddress}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.state}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.postalAddress}
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center align-middle">
-                            {user.numberOfMessages}
-                          </CTableDataCell>
-                          {/* <CTableDataCell className="text-center align-middle">
+                        </CTableRow>
+                      )
+                    ) : (
+                      allUsers
+                        .filter((user) => user.numberOfMessages > 0)
+                        .sort((a, b) => {
+                          return new Date(b.date).getTime() - new Date(a.date).getTime()
+                        })
+                        .map((user, i) => (
+                          <CTableRow key={i}>
+                            <CTableDataCell scope="row" className="text-center align-middle">
+                              {i + 1}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.firstName}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.lastName}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.phoneOne}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.phoneHome}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.phoneTwo}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.phoneThree}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.phoneFour}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.phoneFive}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle w-auto">
+                              {user.homeAddress}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.state}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.postalAddress}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              {user.numberOfMessages}
+                            </CTableDataCell>
+                            {/* <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('Do MMMM YYYY')}
                       </CTableDataCell>
                       <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('h:mm a')}
                       </CTableDataCell> */}
-                          {/* <CTableDataCell>
+                            {/* <CTableDataCell>
                         <CButton
                           color="danger"
                           className="text-white py-2 my-2"
@@ -279,12 +417,13 @@ const Pending = () => {
                           <CIcon icon={cilTrash} />
                         </CButton>
                       </CTableDataCell> */}
-                        </CTableRow>
-                      ))
+                          </CTableRow>
+                        ))
+                    )
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">
-                        No Pending Users
+                        No SMS Delivered
                       </CTableDataCell>
                     </CTableRow>
                   )}
