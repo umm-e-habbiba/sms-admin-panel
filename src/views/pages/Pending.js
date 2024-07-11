@@ -253,14 +253,17 @@ const Pending = () => {
                     <CTableHeaderCell scope="col" className="text-center w-[340px]">
                       Address
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
+                    {/* <CTableHeaderCell scope="col" className="text-center">
                       State
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center w-[95px]">
                       Zip code
-                    </CTableHeaderCell>
+                    </CTableHeaderCell> */}
                     <CTableHeaderCell scope="col" className="text-center w-[155px]">
                       Messages sent
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                      Status
                     </CTableHeaderCell>
                     {/* <CTableHeaderCell scope="col" className="text-center">
                       Date
@@ -312,14 +315,17 @@ const Pending = () => {
                               <CTableDataCell className="text-center align-middle w-auto">
                                 {user.homeAddress}
                               </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
+                              {/* <CTableDataCell className="text-center align-middle">
                                 {user.state}
                               </CTableDataCell>
                               <CTableDataCell className="text-center align-middle">
                                 {user.postalAddress}
-                              </CTableDataCell>
+                              </CTableDataCell> */}
                               <CTableDataCell className="text-center align-middle">
                                 {user.numberOfMessages}
+                              </CTableDataCell>
+                              <CTableDataCell className="align-middle flex justify-center items-center">
+                                <center className="w-5 h-5 rounded-full bg-green-600" />
                               </CTableDataCell>
                               {/* <CTableDataCell className="text-center align-middle">
                       {moment(user.date).format('Do MMMM YYYY')}
@@ -388,14 +394,17 @@ const Pending = () => {
                             <CTableDataCell className="text-center align-middle w-auto">
                               {user.homeAddress}
                             </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
+                            {/* <CTableDataCell className="text-center align-middle">
                               {user.state}
                             </CTableDataCell>
                             <CTableDataCell className="text-center align-middle">
                               {user.postalAddress}
-                            </CTableDataCell>
+                            </CTableDataCell> */}
                             <CTableDataCell className="text-center align-middle">
                               {user.numberOfMessages}
+                            </CTableDataCell>
+                            <CTableDataCell className="align-middle flex justify-center items-center">
+                              <center className="w-5 h-5 rounded-full bg-green-600" />
                             </CTableDataCell>
                             {/* <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('Do MMMM YYYY')}

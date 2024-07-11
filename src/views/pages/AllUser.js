@@ -294,7 +294,7 @@ const AllUser = () => {
                       ) : (
                         <CTableRow>
                           <CTableDataCell colSpan={14} className="text-center">
-                            No SMS Sent in this list
+                            Kindly select a list
                           </CTableDataCell>
                         </CTableRow>
                       )
