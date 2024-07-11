@@ -164,7 +164,7 @@ const Completed = () => {
               <CTable striped responsive>
                 <CTableHead>
                   <CTableRow>
-                    <CTableHeaderCell scope="col" className="text-center flex">
+                    <CTableHeaderCell scope="col" className="text-center">
                       #
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center w-[115px]">
@@ -214,54 +214,58 @@ const Completed = () => {
                 </CTableHead>
                 <CTableBody>
                   {allUsers && allUsers.length > 0 ? (
-                    allUsers.map((user, i) => (
-                      <CTableRow key={i}>
-                        <CTableDataCell scope="row" className="text-center align-middle">
-                          {i + 1}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.firstName}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.lastName}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.phoneOne}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.phoneHome}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.phoneTwo}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.phoneThree}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.phoneFour}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.phoneFive}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle w-auto">
-                          {user.homeAddress}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.state}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.postalAddress}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {user.numberOfMessages}
-                        </CTableDataCell>
-                        {/* <CTableDataCell className="text-center align-middle">
+                    allUsers
+                      .sort((a, b) => {
+                        return new Date(b.date).getTime() - new Date(a.date).getTime()
+                      })
+                      .map((user, i) => (
+                        <CTableRow key={i}>
+                          <CTableDataCell scope="row" className="text-center align-middle">
+                            {i + 1}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.firstName}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.lastName}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.phoneOne}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.phoneHome}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.phoneTwo}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.phoneThree}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.phoneFour}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.phoneFive}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle w-auto">
+                            {user.homeAddress}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.state}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.postalAddress}
+                          </CTableDataCell>
+                          <CTableDataCell className="text-center align-middle">
+                            {user.numberOfMessages}
+                          </CTableDataCell>
+                          {/* <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('Do MMMM YYYY')}
                       </CTableDataCell>
                       <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('h:mm a')}
                       </CTableDataCell> */}
-                        {/* <CTableDataCell>
+                          {/* <CTableDataCell>
                         <CButton
                           color="danger"
                           className="text-white py-2 my-2"
@@ -275,8 +279,8 @@ const Completed = () => {
                           <CIcon icon={cilTrash} />
                         </CButton>
                       </CTableDataCell> */}
-                      </CTableRow>
-                    ))
+                        </CTableRow>
+                      ))
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">

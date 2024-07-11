@@ -114,7 +114,7 @@ const AddUsers = () => {
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>Add User</span>
+          <span>Add Users</span>
         </CCardHeader>
         <CCardBody>
           <CForm onSubmit={handleSubmit(addUser)}>

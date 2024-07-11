@@ -55,7 +55,7 @@ const App = () => {
           <Route path="/active" name="Active" element={<Pending />} />
           <Route path="/failed" name="Failed" element={<Failed />} />
           <Route path="/settings" name="Settings" element={<Settings />} />
-          <Route path="/add-users" name="Add User" element={<AddUsers />} />
+          <Route path="/add-users" name="Add Users" element={<AddUsers />} />
           <Route path="*" name="Page 404" element={<Page404 />} />
         </Routes>
       </Suspense>

@@ -12,7 +12,7 @@ const routes = [
   { path: '/active', name: 'Active', element: Pending },
   { path: '/failed', name: 'Failed', element: Failed },
   { path: '/settings', name: 'Settings', element: Settings },
-  { path: '/add-users', name: 'Add User', element: Settings },
+  { path: '/add-users', name: 'Add Users', element: Settings },
 ]
 
 export default routes
