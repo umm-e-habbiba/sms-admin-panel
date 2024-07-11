@@ -22,6 +22,10 @@
 .message-width {
   width: 60%;
 }
+.table-responsive {
+  height: calc(100vh - 280px);
+  overflow-y: auto;
+}
 @media (min-width: 1900px) {
   .message-width {
     width: 72%;

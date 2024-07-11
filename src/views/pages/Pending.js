@@ -324,9 +324,12 @@ const Pending = () => {
                               <CTableDataCell className="text-center align-middle">
                                 {user.numberOfMessages}
                               </CTableDataCell>
-                              <CTableDataCell className="align-middle flex justify-center items-center">
-                                <center className="w-5 h-5 rounded-full bg-green-600" />
+                              <CTableDataCell className="text-center align-middle">
+                                <span className="text-green-600 font-bold">Sent</span>
                               </CTableDataCell>
+                              {/* <CTableDataCell className="align-middle flex justify-center items-center">
+                                <center className="w-5 h-5 rounded-full bg-green-600" />
+                              </CTableDataCell> */}
                               {/* <CTableDataCell className="text-center align-middle">
                       {moment(user.date).format('Do MMMM YYYY')}
                     </CTableDataCell>
@@ -403,8 +406,8 @@ const Pending = () => {
                             <CTableDataCell className="text-center align-middle">
                               {user.numberOfMessages}
                             </CTableDataCell>
-                            <CTableDataCell className="align-middle flex justify-center items-center">
-                              <center className="w-5 h-5 rounded-full bg-green-600" />
+                            <CTableDataCell className="text-center align-middle">
+                              <span className="text-green-600 font-bold">Sent</span>
                             </CTableDataCell>
                             {/* <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('Do MMMM YYYY')}
