@@ -225,7 +225,6 @@ const AllUser = () => {
                     showFilteredResult ? (
                       filteredUser && filteredUser.length > 0 ? (
                         filteredUser
-                          .filter((user) => user.numberOfMessages > 0)
                           .sort((a, b) => {
                             return new Date(b.date).getTime() - new Date(a.date).getTime()
                           })

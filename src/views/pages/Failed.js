@@ -164,11 +164,10 @@ const Failed = () => {
       .catch((error) => console.error(error))
   }
   const getFilteredUsers = (value) => {
-    // console.log('step', filterUsmle, 'category', filterCategory)
     let filtered_result = []
     filtered_result = allUsers.filter((user) => user.groupName == value)
-    setShowFilteredResult(true)
     setFilteredUser(filtered_result)
+    setShowFilteredResult(true)
   }
   return (
     <DefaultLayout>
@@ -275,7 +274,6 @@ const Failed = () => {
                     showFilteredResult ? (
                       filteredUser && filteredUser.length > 0 ? (
                         filteredUser
-                          .filter((user) => user.numberOfMessages > 0)
                           .sort((a, b) => {
                             return new Date(b.date).getTime() - new Date(a.date).getTime()
                           })
