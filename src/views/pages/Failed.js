@@ -185,7 +185,7 @@ const Failed = () => {
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>Delivery Failed ({allUsers.length})</span>
+          <span className="font-bold">Delivery Failed ({allUsers.length})</span>
           <div className="flex justify-start items-center ">
             <span className="font-bold">Select your desired list: </span>
             <CFormSelect
