@@ -187,18 +187,28 @@ const Pending = () => {
     <DefaultLayout>
       <CCard className="mb-3">
         <CCardHeader className="flex justify-between items-center">
-          <span>SMS Delivered</span>
-          {/* <CButton
-            color="success"
-            className="text-white"
-            onClick={() => {
-              setAddModal(true)
-              setError(false)
-              setErrorMsg('')
-            }}
-          >
-            Add User
-          </CButton> */}
+          <span className="font-bold">SMS Delivered</span>
+          <div className="flex justify-start items-center ">
+            <span className="font-bold">Select your desired list: </span>
+            <CFormSelect
+              aria-label="Default select example"
+              value={groupName}
+              onChange={(e) => {
+                getFilteredUsers(e.target.value, allUsers)
+                setGroupName(e.target.value)
+              }}
+              className="ml-3 w-52 font-bold"
+            >
+              <option value="">Select List name</option>
+              {groupNames && groupNames.length > 0
+                ? groupNames.map((name, index) => (
+                    <option value={name} key={index}>
+                      {name}
+                    </option>
+                  ))
+                : ''}
+            </CFormSelect>
+          </div>
         </CCardHeader>
         <CCardBody>
           {loader ? (
@@ -207,25 +217,38 @@ const Pending = () => {
             </center>
           ) : (
             <>
-              <CFormLabel className="font-bold">Please select your desired list</CFormLabel>
-              <CFormSelect
-                aria-label="Default select example"
-                value={groupName}
-                onChange={(e) => {
-                  getFilteredUsers(e.target.value, allUsers)
-                  setGroupName(e.target.value)
-                }}
-                className="mb-3 w-52 font-bold"
-              >
-                <option value="">Select List name</option>
-                {groupNames && groupNames.length > 0
-                  ? groupNames.map((name, index) => (
-                      <option value={name} key={index}>
-                        {name}
-                      </option>
-                    ))
-                  : ''}
-              </CFormSelect>
+              {groupName && (
+                <h1 className="text-center font-bold uppercase underline mb-3">{groupName}</h1>
+              )}
+              {/* <div className="flex justify-between items-center mb-3">
+                <div>
+                  <CFormLabel className="font-bold">Please select your desired list</CFormLabel>
+                  <CFormSelect
+                    aria-label="Default select example"
+                    value={groupName}
+                    onChange={(e) => {
+                      getFilteredUsers(e.target.value, allUsers)
+                      setGroupName(e.target.value)
+                    }}
+                    className="w-52 font-bold"
+                  >
+                    <option value="">Select List name</option>
+                    {groupNames && groupNames.length > 0
+                      ? groupNames.map((name, index) => (
+                          <option value={name} key={index}>
+                            {name}
+                          </option>
+                        ))
+                      : ''}
+                  </CFormSelect>
+                </div>
+                {groupName && (
+                  <div className="underline pb-2">
+                    <span className="font-bold uppercase text-base">{groupName}</span>
+                  </div>
+                )}
+                <div></div>
+              </div> */}
               <CTable striped responsive>
                 <CTableHead>
                   <CTableRow>
