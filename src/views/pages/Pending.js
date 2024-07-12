@@ -272,77 +272,11 @@ const Pending = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {allUsers && allUsers.length > 0 ? (
-                    showFilteredResult ? (
-                      filteredUser && filteredUser.length > 0 ? (
-                        filteredUser
-                          .filter((user) => user.numberOfMessages > 0)
-                          .sort((a, b) => {
-                            return new Date(b.date).getTime() - new Date(a.date).getTime()
-                          })
-                          .map((user, i) => (
-                            <CTableRow key={i}>
-                              <CTableDataCell scope="row" className="text-center align-middle">
-                                {i + 1}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.firstName}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.lastName}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.activeNumber}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle w-auto">
-                                {user.homeAddress}
-                              </CTableDataCell>
-                              {/* <CTableDataCell className="text-center align-middle">
-                                {user.state}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.postalAddress}
-                              </CTableDataCell> */}
-                              <CTableDataCell className="text-center align-middle">
-                                {user.numberOfMessages}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                <span className="text-green-600 font-bold">Sent</span>
-                              </CTableDataCell>
-                              {/* <CTableDataCell className="align-middle flex justify-center items-center">
-                                <center className="w-5 h-5 rounded-full bg-green-600" />
-                              </CTableDataCell> */}
-                              {/* <CTableDataCell className="text-center align-middle">
-                      {moment(user.date).format('Do MMMM YYYY')}
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center align-middle">
-                      {moment(user.date).format('h:mm a')}
-                    </CTableDataCell> */}
-                              {/* <CTableDataCell>
-                      <CButton
-                        color="danger"
-                        className="text-white py-2 my-2"
-                        onClick={(e) => {
-                          setDeleteModal(true)
-                          setSmsId(x._id)
-                          setError(false)
-                          setErrorMsg('')
-                        }}
-                      >
-                        <CIcon icon={cilTrash} />
-                      </CButton>
-                    </CTableDataCell> */}
-                            </CTableRow>
-                          ))
-                      ) : (
-                        <CTableRow>
-                          <CTableDataCell colSpan={14} className="text-center">
-                            No SMS Sent
-                          </CTableDataCell>
-                        </CTableRow>
-                      )
-                    ) : (
-                      allUsers
+                  {showFilteredResult ? (
+                    filteredUser &&
+                    filteredUser.length > 0 &&
+                    filteredUser.filter((user) => user.numberOfMessages > 0).length > 0 ? (
+                      filteredUser
                         .filter((user) => user.numberOfMessages > 0)
                         .sort((a, b) => {
                           return new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -365,44 +299,53 @@ const Pending = () => {
                               {user.homeAddress}
                             </CTableDataCell>
                             {/* <CTableDataCell className="text-center align-middle">
-                              {user.state}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.postalAddress}
-                            </CTableDataCell> */}
+                                {user.state}
+                              </CTableDataCell>
+                              <CTableDataCell className="text-center align-middle">
+                                {user.postalAddress}
+                              </CTableDataCell> */}
                             <CTableDataCell className="text-center align-middle">
                               {user.numberOfMessages}
                             </CTableDataCell>
                             <CTableDataCell className="text-center align-middle">
                               <span className="text-green-600 font-bold">Sent</span>
                             </CTableDataCell>
+                            {/* <CTableDataCell className="align-middle flex justify-center items-center">
+                                <center className="w-5 h-5 rounded-full bg-green-600" />
+                              </CTableDataCell> */}
                             {/* <CTableDataCell className="text-center align-middle">
-                        {moment(user.date).format('Do MMMM YYYY')}
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center align-middle">
-                        {moment(user.date).format('h:mm a')}
-                      </CTableDataCell> */}
+                      {moment(user.date).format('Do MMMM YYYY')}
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center align-middle">
+                      {moment(user.date).format('h:mm a')}
+                    </CTableDataCell> */}
                             {/* <CTableDataCell>
-                        <CButton
-                          color="danger"
-                          className="text-white py-2 my-2"
-                          onClick={(e) => {
-                            setDeleteModal(true)
-                            setSmsId(x._id)
-                            setError(false)
-                            setErrorMsg('')
-                          }}
-                        >
-                          <CIcon icon={cilTrash} />
-                        </CButton>
-                      </CTableDataCell> */}
+                      <CButton
+                        color="danger"
+                        className="text-white py-2 my-2"
+                        onClick={(e) => {
+                          setDeleteModal(true)
+                          setSmsId(x._id)
+                          setError(false)
+                          setErrorMsg('')
+                        }}
+                      >
+                        <CIcon icon={cilTrash} />
+                      </CButton>
+                    </CTableDataCell> */}
                           </CTableRow>
                         ))
+                    ) : (
+                      <CTableRow>
+                        <CTableDataCell colSpan={14} className="text-center">
+                          No SMS Sent in this List
+                        </CTableDataCell>
+                      </CTableRow>
                     )
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">
-                        No SMS Sent
+                        No list added yet
                       </CTableDataCell>
                     </CTableRow>
                   )}

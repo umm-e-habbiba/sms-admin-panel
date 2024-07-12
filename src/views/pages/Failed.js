@@ -282,85 +282,9 @@ const Failed = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {allUsers && allUsers.length > 0 ? (
-                    showFilteredResult ? (
-                      filteredUser && filteredUser.length > 0 ? (
-                        filteredUser
-                          .sort((a, b) => {
-                            return new Date(b.date).getTime() - new Date(a.date).getTime()
-                          })
-                          .map((user, i) => (
-                            <CTableRow key={i}>
-                              <CTableDataCell scope="row" className="text-center align-middle">
-                                {i + 1}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.firstName}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.lastName}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneOne}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneHome}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneTwo}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneThree}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneFour}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneFive}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle w-auto">
-                                {user.homeAddress}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.state}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.postalAddress}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.numberOfMessages}
-                              </CTableDataCell>
-                              {/* <CTableDataCell className="text-center align-middle">
-                      {moment(user.date).format('Do MMMM YYYY')}
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center align-middle">
-                      {moment(user.date).format('h:mm a')}
-                    </CTableDataCell> */}
-                              {/* <CTableDataCell>
-                      <CButton
-                        color="danger"
-                        className="text-white py-2 my-2"
-                        onClick={(e) => {
-                          setDeleteModal(true)
-                          setSmsId(x._id)
-                          setError(false)
-                          setErrorMsg('')
-                        }}
-                      >
-                        <CIcon icon={cilTrash} />
-                      </CButton>
-                    </CTableDataCell> */}
-                            </CTableRow>
-                          ))
-                      ) : (
-                        <CTableRow>
-                          <CTableDataCell colSpan={14} className="text-center">
-                            No SMS Sent in this list
-                          </CTableDataCell>
-                        </CTableRow>
-                      )
-                    ) : (
-                      allUsers
+                  {showFilteredResult ? (
+                    filteredUser && filteredUser.length > 0 ? (
+                      filteredUser
                         .sort((a, b) => {
                           return new Date(b.date).getTime() - new Date(a.date).getTime()
                         })
@@ -406,32 +330,38 @@ const Failed = () => {
                               {user.numberOfMessages}
                             </CTableDataCell>
                             {/* <CTableDataCell className="text-center align-middle">
-                          {moment(user.date).format('Do MMMM YYYY')}
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center align-middle">
-                          {moment(user.date).format('h:mm a')}
-                        </CTableDataCell> */}
+                      {moment(user.date).format('Do MMMM YYYY')}
+                    </CTableDataCell>
+                    <CTableDataCell className="text-center align-middle">
+                      {moment(user.date).format('h:mm a')}
+                    </CTableDataCell> */}
                             {/* <CTableDataCell>
-                          <CButton
-                            color="danger"
-                            className="text-white py-2 my-2"
-                            onClick={(e) => {
-                              setDeleteModal(true)
-                              setSmsId(x._id)
-                              setError(false)
-                              setErrorMsg('')
-                            }}
-                          >
-                            <CIcon icon={cilTrash} />
-                          </CButton>
-                        </CTableDataCell> */}
+                      <CButton
+                        color="danger"
+                        className="text-white py-2 my-2"
+                        onClick={(e) => {
+                          setDeleteModal(true)
+                          setSmsId(x._id)
+                          setError(false)
+                          setErrorMsg('')
+                        }}
+                      >
+                        <CIcon icon={cilTrash} />
+                      </CButton>
+                    </CTableDataCell> */}
                           </CTableRow>
                         ))
+                    ) : (
+                      <CTableRow>
+                        <CTableDataCell colSpan={14} className="text-center">
+                          No SMS Sent in this list
+                        </CTableDataCell>
+                      </CTableRow>
                     )
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">
-                        No Failed Users
+                        No list added yet
                       </CTableDataCell>
                     </CTableRow>
                   )}
