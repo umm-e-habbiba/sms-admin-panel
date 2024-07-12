@@ -212,7 +212,7 @@ const Pending = () => {
                     aria-label="Default select example"
                     value={groupName}
                     onChange={(e) => {
-                      getFilteredUsers(e.target.value)
+                      getFilteredUsers(e.target.value, allUsers)
                       setGroupName(e.target.value)
                     }}
                     className="mb-3 "
