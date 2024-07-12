@@ -54,7 +54,7 @@ const Pending = () => {
     const getToken = localStorage.getItem('token')
     if (getToken) {
       getAllUsers()
-      getAllGroupNames()
+      // getAllGroupNames()
       setToken(getToken)
     } else {
       navigate('/login')
@@ -91,7 +91,9 @@ const Pending = () => {
         console.log(result)
         if (result.success) {
           setallUsers(result.Users?.filter((user) => user.status == 'Pending'))
-          setLoader(false)
+          // setLoader(false)
+          // setLoader(false)
+          getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
         }
       })
       .catch((error) => console.error(error))
@@ -143,7 +145,7 @@ const Pending = () => {
         setSpinner(false)
       })
   }
-  const getAllGroupNames = () => {
+  const getAllGroupNames = (dataArray) => {
     const myHeaders = new Headers()
     myHeaders.append('Authorization', token)
 
@@ -159,17 +161,23 @@ const Pending = () => {
         console.log(result)
         if (result.status == 'success') {
           // setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
-          setGroupNames(result.uniqueGroupNames)
+          if (result.uniqueGroupNames.length > 0) {
+            console.log('group name', result.uniqueGroupNames[0])
+            setGroupNames(result.uniqueGroupNames)
+            setGroupName(result.uniqueGroupNames[0])
+            getFilteredUsers(result.uniqueGroupNames[0], dataArray)
+            // setShowFilteredResult(true)
+          }
         }
       })
       .catch((error) => console.error(error))
   }
-  const getFilteredUsers = (value) => {
-    // console.log('step', filterUsmle, 'category', filterCategory)
+  const getFilteredUsers = (value, usersArray) => {
     let filtered_result = []
-    filtered_result = allUsers.filter((user) => user.groupName == value)
+    filtered_result = usersArray.filter((user) => user.groupName == value)
     setShowFilteredResult(true)
     setFilteredUser(filtered_result)
+    setLoader(false)
   }
   return (
     <DefaultLayout>
@@ -226,31 +234,16 @@ const Pending = () => {
                     <CTableHeaderCell scope="col" className="text-center">
                       #
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[115px]">
+                    <CTableHeaderCell scope="col" className="text-center">
                       First name
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[115px]">
+                    <CTableHeaderCell scope="col" className="text-center">
                       Last name
                     </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
                       Phone
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[135px]">
-                      Home Phone
-                    </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center">
-                      Phone2
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
-                      Phone3
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
-                      Phone4
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
-                      Phone5
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[340px]">
                       Address
                     </CTableHeaderCell>
                     {/* <CTableHeaderCell scope="col" className="text-center">
@@ -259,10 +252,10 @@ const Pending = () => {
                     <CTableHeaderCell scope="col" className="text-center w-[95px]">
                       Zip code
                     </CTableHeaderCell> */}
-                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                    <CTableHeaderCell scope="col" className="text-center">
                       Messages sent
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                    <CTableHeaderCell scope="col" className="text-center">
                       Status
                     </CTableHeaderCell>
                     {/* <CTableHeaderCell scope="col" className="text-center">
@@ -295,22 +288,7 @@ const Pending = () => {
                                 {user.lastName}
                               </CTableDataCell>
                               <CTableDataCell className="text-center align-middle">
-                                {user.phoneOne}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneHome}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneTwo}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneThree}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneFour}
-                              </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.phoneFive}
+                                {user.activeNumber}
                               </CTableDataCell>
                               <CTableDataCell className="text-center align-middle w-auto">
                                 {user.homeAddress}
@@ -355,7 +333,7 @@ const Pending = () => {
                       ) : (
                         <CTableRow>
                           <CTableDataCell colSpan={14} className="text-center">
-                            No SMS Sent in this list
+                            No SMS Sent
                           </CTableDataCell>
                         </CTableRow>
                       )
@@ -377,22 +355,7 @@ const Pending = () => {
                               {user.lastName}
                             </CTableDataCell>
                             <CTableDataCell className="text-center align-middle">
-                              {user.phoneOne}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.phoneHome}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.phoneTwo}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.phoneThree}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.phoneFour}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.phoneFive}
+                              {user.activeNumber}
                             </CTableDataCell>
                             <CTableDataCell className="text-center align-middle w-auto">
                               {user.homeAddress}
@@ -435,7 +398,7 @@ const Pending = () => {
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan={14} className="text-center">
-                        No SMS Delivered
+                        No SMS Sent
                       </CTableDataCell>
                     </CTableRow>
                   )}

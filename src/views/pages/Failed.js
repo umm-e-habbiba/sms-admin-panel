@@ -53,7 +53,7 @@ const Failed = () => {
     const getToken = localStorage.getItem('token')
     if (getToken) {
       getAllUsers()
-      getAllGroupNames()
+      // getAllGroupNames()
       setToken(getToken)
     } else {
       navigate('/login')
@@ -87,10 +87,11 @@ const Failed = () => {
     fetch(API_URL + 'users', requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
+        // console.log(result)
         if (result.success) {
           setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
-          setLoader(false)
+          // setLoader(false)
+          getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
         }
       })
       .catch((error) => console.error(error))
@@ -142,7 +143,7 @@ const Failed = () => {
         setSpinner(false)
       })
   }
-  const getAllGroupNames = () => {
+  const getAllGroupNames = (dataArray) => {
     const myHeaders = new Headers()
     myHeaders.append('Authorization', token)
 
@@ -158,16 +159,22 @@ const Failed = () => {
         console.log(result)
         if (result.status == 'success') {
           // setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
-          setGroupNames(result.uniqueGroupNames)
+          if (result.uniqueGroupNames.length > 0) {
+            setGroupNames(result.uniqueGroupNames)
+            setGroupName(result.uniqueGroupNames[0])
+            getFilteredUsers(result.uniqueGroupNames[0], dataArray)
+            // setShowFilteredResult(true)
+          }
         }
       })
       .catch((error) => console.error(error))
   }
-  const getFilteredUsers = (value) => {
+  const getFilteredUsers = (value, usersArray) => {
     let filtered_result = []
-    filtered_result = allUsers.filter((user) => user.groupName == value)
+    filtered_result = usersArray.filter((user) => user.groupName == value)
     setFilteredUser(filtered_result)
     setShowFilteredResult(true)
+    setLoader(false)
   }
   return (
     <DefaultLayout>

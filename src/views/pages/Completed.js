@@ -53,7 +53,7 @@ const Completed = () => {
     const getToken = localStorage.getItem('token')
     if (getToken) {
       getAllUsers()
-      getAllGroupNames()
+      // getAllGroupNames()
       setToken(getToken)
     } else {
       navigate('/login')
@@ -90,7 +90,9 @@ const Completed = () => {
         console.log(result)
         if (result.success) {
           setallUsers(result.Users?.filter((user) => user.status == 'Unsubscribed'))
-          setLoader(false)
+          // setLoader(false)
+          // setLoader(false)
+          getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
         }
       })
       .catch((error) => console.error(error))
@@ -142,7 +144,7 @@ const Completed = () => {
         setSpinner(false)
       })
   }
-  const getAllGroupNames = () => {
+  const getAllGroupNames = (dataArray) => {
     const myHeaders = new Headers()
     myHeaders.append('Authorization', token)
 
@@ -158,17 +160,23 @@ const Completed = () => {
         console.log(result)
         if (result.status == 'success') {
           // setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
-          setGroupNames(result.uniqueGroupNames)
+          if (result.uniqueGroupNames.length > 0) {
+            setGroupNames(result.uniqueGroupNames)
+            setGroupName(result.uniqueGroupNames[0])
+            getFilteredUsers(result.uniqueGroupNames[0], dataArray)
+            // setShowFilteredResult(true)
+          }
         }
       })
       .catch((error) => console.error(error))
   }
-  const getFilteredUsers = (value) => {
+  const getFilteredUsers = (value, usersArray) => {
     // console.log('step', filterUsmle, 'category', filterCategory)
     let filtered_result = []
-    filtered_result = allUsers.filter((user) => user.groupName == value)
+    filtered_result = usersArray.filter((user) => user.groupName == value)
     setShowFilteredResult(true)
     setFilteredUser(filtered_result)
+    setLoader(false)
   }
   return (
     <DefaultLayout>
