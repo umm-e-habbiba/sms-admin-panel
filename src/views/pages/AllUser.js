@@ -126,7 +126,7 @@ const AllUser = () => {
   return (
     <DefaultLayout>
       <CCard className="mb-3">
-        <CCardHeader className="flex justify-between items-center">
+        <CCardHeader className="flex justify-between items-center bg-[#323a49] text-white">
           <span className="font-bold">All Users ({allUsers.length})</span>
           <div className="flex justify-start items-center ">
             <span className="font-bold">Select your desired list: </span>

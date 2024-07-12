@@ -118,7 +118,7 @@ const Settings = () => {
   return (
     <DefaultLayout>
       <CCard className="mb-3">
-        <CCardHeader>SMS Settings</CCardHeader>
+        <CCardHeader className=" bg-[#323a49] text-white">SMS Settings</CCardHeader>
         <CCardBody>
           <CFormSelect
             aria-label="Default select example"

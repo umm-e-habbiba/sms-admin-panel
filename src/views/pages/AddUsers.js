@@ -113,7 +113,7 @@ const AddUsers = () => {
   return (
     <DefaultLayout>
       <CCard className="mb-3">
-        <CCardHeader className="flex justify-between items-center">
+        <CCardHeader className="flex justify-between items-center bg-[#323a49] text-white">
           <span>Add Users</span>
         </CCardHeader>
         <CCardBody>
