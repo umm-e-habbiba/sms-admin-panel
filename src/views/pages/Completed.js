@@ -206,31 +206,25 @@ const Completed = () => {
             </center>
           ) : (
             <>
-              <CRow className="flex justify-start items-center">
-                <CCol sm={12} lg={1}>
-                  <CFormLabel className="text-center">List Name: </CFormLabel>
-                </CCol>
-                <CCol sm={12} lg={11}>
-                  <CFormSelect
-                    aria-label="Default select example"
-                    value={groupName}
-                    onChange={(e) => {
-                      getFilteredUsers(e.target.value, allUsers)
-                      setGroupName(e.target.value)
-                    }}
-                    className="mb-3 "
-                  >
-                    <option value="">Select List name</option>
-                    {groupNames && groupNames.length > 0
-                      ? groupNames.map((name, index) => (
-                          <option value={name} key={index}>
-                            {name}
-                          </option>
-                        ))
-                      : ''}
-                  </CFormSelect>
-                </CCol>
-              </CRow>
+              <CFormLabel className="font-bold">Please select your desired list</CFormLabel>
+              <CFormSelect
+                aria-label="Default select example"
+                value={groupName}
+                onChange={(e) => {
+                  getFilteredUsers(e.target.value, allUsers)
+                  setGroupName(e.target.value)
+                }}
+                className="mb-3 w-52 font-bold"
+              >
+                <option value="">Select List name</option>
+                {groupNames && groupNames.length > 0
+                  ? groupNames.map((name, index) => (
+                      <option value={name} key={index}>
+                        {name}
+                      </option>
+                    ))
+                  : ''}
+              </CFormSelect>
               <CTable striped responsive>
                 <CTableHead>
                   <CTableRow>
@@ -264,14 +258,11 @@ const Completed = () => {
                     <CTableHeaderCell scope="col" className="text-center w-[340px]">
                       Address
                     </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center">
-                      State
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col" className="text-center w-[95px]">
-                      Zip code
-                    </CTableHeaderCell>
                     <CTableHeaderCell scope="col" className="text-center w-[155px]">
                       Messages sent
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col" className="text-center w-[155px]">
+                      Status
                     </CTableHeaderCell>
                     {/* <CTableHeaderCell scope="col" className="text-center">
                       Date
@@ -322,13 +313,10 @@ const Completed = () => {
                               {user.homeAddress}
                             </CTableDataCell>
                             <CTableDataCell className="text-center align-middle">
-                              {user.state}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
-                              {user.postalAddress}
-                            </CTableDataCell>
-                            <CTableDataCell className="text-center align-middle">
                               {user.numberOfMessages}
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center align-middle">
+                              <span className="text-yellow-400 font-bold">Opt-out</span>
                             </CTableDataCell>
                             {/* <CTableDataCell className="text-center align-middle">
                       {moment(user.date).format('Do MMMM YYYY')}
