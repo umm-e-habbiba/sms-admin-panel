@@ -266,9 +266,6 @@ const AllUser = () => {
                               <CTableDataCell className="text-center align-middle">
                                 {user.postalAddress}
                               </CTableDataCell>
-                              <CTableDataCell className="text-center align-middle">
-                                {user.numberOfMessages}
-                              </CTableDataCell>
                               {/* <CTableDataCell className="text-center align-middle">
                         {moment(user.date).format('Do MMMM YYYY')}
                       </CTableDataCell>

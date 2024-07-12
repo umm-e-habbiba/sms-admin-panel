@@ -89,10 +89,14 @@ const Completed = () => {
       .then((result) => {
         console.log(result)
         if (result.success) {
-          setallUsers(result.Users?.filter((user) => user.status == 'Unsubscribed'))
-          // setLoader(false)
-          // setLoader(false)
-          getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
+          if (result.Users?.length > 0) {
+            setallUsers(result.Users?.filter((user) => user.status == 'Unsubscribed'))
+            getAllGroupNames(result.Users?.filter((user) => user.status == 'Unsubscribed'))
+          } else {
+            setLoader(false)
+          }
+        } else {
+          setLoader(false)
         }
       })
       .catch((error) => console.error(error))

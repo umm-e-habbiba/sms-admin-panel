@@ -90,10 +90,14 @@ const Pending = () => {
       .then((result) => {
         console.log(result)
         if (result.success) {
-          setallUsers(result.Users?.filter((user) => user.status == 'Pending'))
-          // setLoader(false)
-          // setLoader(false)
-          getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
+          if (result.Users?.length > 0) {
+            setallUsers(result.Users?.filter((user) => user.status == 'Pending'))
+            getAllGroupNames(result.Users?.filter((user) => user.status == 'Pending'))
+          } else {
+            setLoader(false)
+          }
+        } else {
+          setLoader(false)
         }
       })
       .catch((error) => console.error(error))

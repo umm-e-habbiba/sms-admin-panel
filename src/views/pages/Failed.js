@@ -89,9 +89,14 @@ const Failed = () => {
       .then((result) => {
         // console.log(result)
         if (result.success) {
-          setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
-          // setLoader(false)
-          getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
+          if (result.Users?.length > 0) {
+            setallUsers(result.Users?.filter((user) => user.status == 'Failed'))
+            getAllGroupNames(result.Users?.filter((user) => user.status == 'Failed'))
+          } else {
+            setLoader(false)
+          }
+        } else {
+          setLoader(false)
         }
       })
       .catch((error) => console.error(error))
