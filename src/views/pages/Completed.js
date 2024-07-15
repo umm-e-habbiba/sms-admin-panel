@@ -217,7 +217,10 @@ const Completed = () => {
           ) : (
             <>
               {groupName && (
-                <h1 className="text-center font-bold uppercase underline mb-3">{groupName}</h1>
+                <h1 className="text-center mb-3">
+                  <span className="font-bold uppercase underline ">{groupName}</span> (
+                  {filteredUser.length} Opt-Out users in this list)
+                </h1>
               )}
               <CTable striped responsive>
                 <CTableHead>
