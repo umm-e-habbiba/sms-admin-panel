@@ -218,10 +218,9 @@ const Pending = () => {
           ) : (
             <>
               {groupName && (
-                <h1 className="text-center mb-3">
-                  <span className="font-bold uppercase underline ">{groupName}</span> (
-                  {filteredUser.filter((user) => user.numberOfMessages > 0).length} SMS delivered in
-                  this list)
+                <h1 className="text-center mb-3 font-bold ">
+                  <span className="uppercase underline ">{groupName}</span> (Total SMS Sent :
+                  {filteredUser.filter((user) => user.numberOfMessages > 0).length})
                 </h1>
               )}
               {/* <div className="flex justify-between items-center mb-3">
