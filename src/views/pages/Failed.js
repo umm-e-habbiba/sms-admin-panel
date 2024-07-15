@@ -217,8 +217,8 @@ const Failed = () => {
             <>
               {groupName && (
                 <h1 className="text-center mb-3 font-bold ">
-                  <span className="uppercase underline ">{groupName}</span> (Total SMS Failed :
-                  {filteredUser.length})
+                  <span className="uppercase underline ">{groupName}</span> Total SMS Failed :{' '}
+                  <span className="text-red-400">{filteredUser.length}</span>
                 </h1>
               )}
               <CTable striped responsive>

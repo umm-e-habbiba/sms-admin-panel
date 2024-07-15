@@ -218,8 +218,8 @@ const Completed = () => {
             <>
               {groupName && (
                 <h1 className="text-center mb-3 font-bold ">
-                  <span className="uppercase underline ">{groupName}</span> (Total Opt-Out Users :
-                  {filteredUser.length})
+                  <span className="uppercase underline ">{groupName}</span> Total Opt-Out Users :{' '}
+                  <span className="text-red-400">{filteredUser.length}</span>
                 </h1>
               )}
               <CTable striped responsive>
